@@ -34,7 +34,9 @@ class HashMap {
 
     get(key) {
         let hashCode = this.hash(key);
-        return this.buckets[hashCode] //.find(key);
+        let list = this.buckets[hashCode];
+        // if list exists return the key: value else null
+        return list ? list.find(key).value : null;
     };
 
 }
@@ -45,8 +47,7 @@ let map = new HashMap();
 map.set("tom", 'this is value 1');
 map.set("test", "value2");
 map.set("test", "value3")
-let list = map.get("tom")
-console.log(list.size());
-console.log(map.get("test"));
+
+console.log(map.get("t"));
 
 
