@@ -57,18 +57,20 @@ class HashMap {
         return false;
     };
 
+    length() {
+        // JS highorder functions ignore holes created from array constructor
+        let length = this.buckets.reduce((acc, curr) => {
+            return acc + curr.size();
+        }, 0);
+        return length;
+    }
 
 }
 let map = new HashMap();
 
-
-
-map.set("test", "value2");
 map.set("test", "value3")
 map.set("taylor", "valueTay");
 map.set("tom", "value3")
 
-console.log(map.has("taylor"));
-
-map.remove("tom")
+console.log(map.length());
 console.log(map.buckets[map.hash("test")].toString());
