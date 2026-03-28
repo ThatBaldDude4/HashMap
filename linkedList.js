@@ -83,7 +83,7 @@ class LinkedList {
         for (let i = 0; i < listLength; i++) {
             currNode = currNode.nextNode;
             if (!currNode) {return false};
-            if (currNode.value === value) {
+            if (currNode.value.value === value) {
                 return true;
             }
         }
@@ -92,13 +92,13 @@ class LinkedList {
 
     findIndex(value) {
         let listLength = this.size();
-        let currNode = this;
+        let currNode = this.nextNode;
         for (let i = 0; i < listLength; i++) {
-            currNode = currNode.nextNode;
             if (!currNode) {return -1};
-            if (currNode.value === value) {
+            if (currNode.value.value === value) {
                 return i;
             }
+            currNode = currNode.nextNode;
         }
         return -1;
     }
@@ -124,7 +124,7 @@ class LinkedList {
         if (this.size() <= 0) {return ""};
         for (let i = 0; i < this.size(); i++) {
             currNode = currNode.nextNode;
-            result.push(`( ${currNode.value} )`)
+            result.push(`( ${currNode.value.key}: ${currNode.value.value} )`)
         }
         result.push("null")
         return result.join(" -> ")

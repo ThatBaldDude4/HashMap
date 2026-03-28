@@ -37,7 +37,7 @@ class HashMap {
         let hashCode = this.hash(key);
         let list = this.buckets[hashCode];
         // if list exists return the key: value else null
-        return list ? list.find(key).value : null;
+        return list.find(key) ? list.find(key).value : null;
     };
 
     has(key) {
@@ -47,10 +47,15 @@ class HashMap {
     };
 
     remove(key) {
-        if (this.has(key)) {
+        let value = this.get(key);
+        if (value) {
             let hashCode = this.hash(key);
             let list = this.buckets[hashCode];
-            
+            let index = list.findIndex(value);
+            list.removeAt(index);
+            return true;
+        }else {
+            return false;
         }
     }
 
@@ -62,8 +67,13 @@ let map = new HashMap();
 
 map.set("test", "value2");
 map.set("test", "value3")
+map.set("taylor", "valueTay");
+map.set("tom", "valueTom")
 
-console.log(map.has("tom"));
-console.log(map.has("test"));
+console.log(map.has("taylor"));
 
-
+map.remove("tom");
+map.remove("test")
+map.remove("test")
+console.log(map.buckets[map.hash("test")].toString());
+ 
