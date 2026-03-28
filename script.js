@@ -28,6 +28,7 @@ class HashMap {
         if (!this.buckets[hashCode]) {
             this.buckets[hashCode] = new LinkedList();
         }
+        // cache .find() and reuse instead of calling twice
         this.buckets[hashCode].find(key) ? this.buckets[hashCode].find(key).value = value : this.buckets[hashCode].append({key, value});
         // if key:value don't exist add the pair to the linkedList otherwise update the value {key: "key", value: "some value"}
     };
@@ -39,15 +40,22 @@ class HashMap {
         return list ? list.find(key).value : null;
     };
 
+    has(key) {
+        let hashCode = this.hash(key);
+        let list = this.buckets[hashCode];
+        return list.find(key) ? true : false;
+    }
+
 }
 
 let map = new HashMap();
 
 
-map.set("tom", 'this is value 1');
+
 map.set("test", "value2");
 map.set("test", "value3")
 
-console.log(map.get("t"));
+console.log(map.has("tom"));
+console.log(map.has("test"));
 
 
