@@ -130,16 +130,36 @@ class LinkedList {
         return result.join(" -> ")
     }
 
-    insertAt(index, ...values) {
-        if (index < 0 || index > this.size()) {
-            throw new RangeError();
-        }
+    // insertAt(index, ...values) {
+    //     if (index < 0 || index > this.size()) {
+    //         throw new RangeError();
+    //     }
 
-        let tail = this.tail();
-        for (let i = 0; i < values.length; i++) {
-            let headNode = this.tail();
-            this.append(values[i]);
+    //     let tail = this.tail();
+    //     for (let i = 0; i < values.length; i++) {
+    //         let headNode = this.tail();
+    //         this.append(values[i]);
+    //     }
+    // }
+
+    removeAt(index) {
+        let currNode = this.nextNode;
+        let prevNode = this;
+        let length = this.size();
+
+        if (index >= length) {throw new RangeError()};
+
+        for (let i = 0; i < length; i++) {
+            if (i === index) {
+                let nextNode = currNode.nextNode;
+                prevNode.nextNode = nextNode;
+                return true;
+            }else {
+                currNode = currNode.nextNode;
+                prevNode = prevNode.nextNode;
+            }
         }
+        throw new RangeError()
     }
 }
 

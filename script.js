@@ -44,6 +44,14 @@ class HashMap {
         let hashCode = this.hash(key);
         let list = this.buckets[hashCode];
         return list.find(key) ? true : false;
+    };
+
+    remove(key) {
+        if (this.has(key)) {
+            let hashCode = this.hash(key);
+            let list = this.buckets[hashCode];
+            
+        }
     }
 
 }
