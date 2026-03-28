@@ -118,6 +118,19 @@ class LinkedList {
         return item;
     }
 
+    findIndexByKey(key) {
+        let currNode = this.nextNode;
+        let length = this.size();
+        for (let i = 0; i < length; i++) {
+            if (!currNode) {return -1};
+            if (currNode.value.key === key) {
+                return i
+            }
+            currNode = currNode.nextNode;
+        }
+        return -1;
+    }
+
     toString() {
         let result = [];
         let currNode = this;

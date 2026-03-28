@@ -47,20 +47,18 @@ class HashMap {
     };
 
     remove(key) {
-        let value = this.get(key);
-        if (value) {
-            let hashCode = this.hash(key);
-            let list = this.buckets[hashCode];
-            let index = list.findIndex(value);
-            list.removeAt(index);
-            return true;
-        }else {
-            return false;
-        }
-    }
+        let hashCode = this.hash(key);
+        let list = this.buckets[hashCode];
+        let index = list.findIndexByKey(key);
+
+        if (index === -1) {return false};
+        list.removeAt(index);
+        return true;
+        return false;
+    };
+
 
 }
-
 let map = new HashMap();
 
 
@@ -68,12 +66,9 @@ let map = new HashMap();
 map.set("test", "value2");
 map.set("test", "value3")
 map.set("taylor", "valueTay");
-map.set("tom", "valueTom")
+map.set("tom", "value3")
 
 console.log(map.has("taylor"));
 
-map.remove("tom");
-map.remove("test")
-map.remove("test")
+map.remove("tom")
 console.log(map.buckets[map.hash("test")].toString());
- 
